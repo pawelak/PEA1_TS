@@ -79,7 +79,7 @@ void City::printMatrix()
 	{
 		for (int j = 0; j < numberOfCities; j++)
 		{
-			cout << setw(6) << setprecision(3) << cityMatrix[i][j];
+			cout << setw(6) << setprecision(3) << cityMatrix2[i][j];
 		}
 		cout << endl;
 	}
@@ -137,3 +137,152 @@ void City::printBestPermutation()
 }
 
 
+void City::duplicate()
+{
+	for (int i = 0; i < numberOfCities; i++)
+	{
+		cityMatrix2.push_back(cityMatrix[i]);
+		/*for (int j = 0; j < numberOfCities; j++)
+		{
+		cityMatrix2.pus
+		}*/
+	}
+}
+
+void City::LittlesAlgotithm()
+{
+	vector <float> a;
+	int LB = 0;
+	a = FindSmallestH();
+	SubtractH(a);
+	addLB(LB, a);
+	a.clear();
+	a = FindSmallestV();
+	SubtractV(a);
+	addLB(LB, a);
+
+
+}
+
+vector<float> City::FindSmallestH()
+{
+	vector <float> smallest;
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		float help = 100;
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+			if (help > cityMatrix2[i][j] && i != j)
+			{
+				help = cityMatrix2[i][j];
+			}
+		}
+		smallest.push_back(help);
+	}
+	return smallest;
+}
+vector<float> City::FindSmallestV()
+{
+	vector <float> smallest;
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		float help = 100;
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+			if (help > cityMatrix2[j][i] && i != j)
+			{
+				help = cityMatrix2[j][i];
+			}
+		}
+		smallest.push_back(help);
+	}
+	return smallest;
+}
+
+
+
+void City::SubtractH(vector <float> a)
+{
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+			cityMatrix2[i][j] -= a[i];
+		}
+	}
+}
+
+void City::SubtractV(vector <float> a)
+{
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+			cityMatrix2[j][i] -= a[i];
+		}
+	}
+}
+
+
+float City::addLB(int a, vector <float> b)
+{
+	for (int i = 0; i < b.size(); i++)
+	{
+		a += b[i];
+	}
+	return a;
+}
+
+
+
+vector<float> City::FindSmallestWithout0H()
+{
+	vector <float> smallest;
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		float help = 100;
+		bool czy = 0;
+
+		int ileZer = 0;
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+
+			if (help > cityMatrix2[i][j] && i != j)
+			{
+				if (ileZer <= 1)
+					help = cityMatrix2[i][j];
+
+				if (cityMatrix2[i][j] == 0)ileZer++;
+
+				if (ileZer >1)
+				{
+					help = 0;
+					ileZer = 0;
+					continue;
+				}
+
+
+
+			}
+		}
+		smallest.push_back(help);
+	}
+	return smallest;
+}
+vector<float> City::FindSmallestV()
+{
+	vector <float> smallest;
+	for (int i = 0; i < cityMatrix2.size(); i++)
+	{
+		float help = 100;
+		for (int j = 0; j < cityMatrix2.size(); j++)
+		{
+			if (help > cityMatrix2[j][i] && i != j)
+			{
+				help = cityMatrix2[j][i];
+			}
+		}
+		smallest.push_back(help);
+	}
+	return smallest;
+}

@@ -8,12 +8,16 @@
 
 int main()
 {
-	Generator g(9, -10, 10, -10, 10);
+	//Generator g(9, -10, 10, -10, 10);
 	City city("plik.txt");
 	//city.print();
-	//city.printMatrix();
-	city.bruteForce();
-	city.printBestPermutation();
+	city.duplicate();
+
+	city.printMatrix();
+	vector <float> to;
+	to = city.FindSmallestV();
+	//city.bruteForce();
+	//city.printBestPermutation();
 
 
 	return 0;
