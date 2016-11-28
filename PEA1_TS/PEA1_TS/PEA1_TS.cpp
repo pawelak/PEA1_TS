@@ -14,10 +14,17 @@ int main()
 	city.duplicate();
 
 	city.printMatrix();
-	vector <float> to;
-	to = city.FindSmallestV();
-	//city.bruteForce();
-	//city.printBestPermutation();
+	city.printMatrix2();
+	float r=0;
+
+
+	city.Reduce(city.cityMatrix, r);
+	
+	
+	cout << endl << r << endl;
+
+
+
 
 
 	return 0;
