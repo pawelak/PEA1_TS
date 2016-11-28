@@ -16,11 +16,11 @@ private:
 	float inv;
 	vector <int> xy;
 
-	vector <float> bestH;
-	vector <float> bestV;
+	
 
-	vector <vector <int>> path;
+	
 public:
+	vector <vector <int>> path;
 	vector <vector <float>> cityMatrix;
 
 	
@@ -32,7 +32,7 @@ public:
 
 	void printMatrix();
 	void printMatrix2();
-	void printSomeMatrix(vector<vector<float>> m);
+	//void printSomeMatrix(vector<vector<float>> m);
 	void bruteForce();
 	unsigned long factorial(unsigned long f);
 	void printBestPermutation();
@@ -48,19 +48,18 @@ public:
 
 
 
-	float findEdge(vector<vector<float>> m, int r, int c);
-
 	float findEdge(vector<vector<float>> m, int & row, int & column);
 
-	vector<float> FindSmallestWithoutZeroH();
+	vector<float> FindSmallestWithoutZeroH(vector<vector<float>> m);
 
-	vector<float> FindSmallestWithoutZeroV();
+	vector<float> FindSmallestWithoutZeroV(vector<vector<float>> m);
 
-	void TraverseTree(vector<vector<float>> matrix, vector<vector<int>> p, float LB);
 
-	vector <vector <float>>  deleteRowAndColumn(int x, int y);
+	void TraverseTree(vector<vector<float>> matrix, vector<vector<int>>* p, float LB);
 
-	vector<vector<int>> addEdge(int a, int b, vector<vector<int>> help);
+	vector<vector<float>> deleteRowAndColumn(int x, int y, vector<vector<float>> m);
+
+
 
 
 
