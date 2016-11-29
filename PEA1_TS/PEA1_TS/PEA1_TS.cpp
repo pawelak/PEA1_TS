@@ -9,10 +9,20 @@
 
 int main()
 {
-	//Generator g(6, 0, 5, 0, 10);
-	City city("att48.txt");
+	Clock timer;
+
+	Generator g(6, 0, 100, 0, 100);
+	City city("plik.txt");
+
+	timer.startTimer();
+
 	//city.print();
-	//city.bruteForce();
+	city.bruteForce();
+
+	timer.endTimer();
+	cout << "TIME:   " << timer.ReturnTime() << endl;
+
+
 	//city.printBestPermutation();
 	city.duplicate();
 
@@ -21,14 +31,14 @@ int main()
 	float r=0;
 	
 	
-	Clock timer;
+	
 	timer.startTimer();
 	city.TraverseTree(city.cityMatrix, &city.path, r);
 	timer.endTimer();
 	cout <<"TIME:   " <<  timer.ReturnTime() << endl;
 
 	//city.deleteRowAndColumn(1, 1, city.cityMatrix);
-
+	cout << city.getMinSol() << endl;
 
 
 	return 0;

@@ -57,6 +57,8 @@ public:
 
 	void TraverseTree(vector<vector<float>> matrix, vector<vector<int>>* p, float LB);
 
+	float getMinSol();
+
 	vector<vector<float>> deleteRowAndColumn(int x, int y, vector<vector<float>> m);
 
 

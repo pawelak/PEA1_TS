@@ -187,7 +187,7 @@ vector <vector <float>> City::Reduce(vector <vector <float>> m, float &r)		//moj
 		r += a[i];
 		//cout << a[i] << " ";
 	}
-	cout << endl;
+	//cout << endl;
 	a.clear();
 
 	a = FindSmallestV(m);
@@ -195,10 +195,10 @@ vector <vector <float>> City::Reduce(vector <vector <float>> m, float &r)		//moj
 	for (int i = 0; i < a.size(); i++)
 	{
 		r += a[i];
-		cout << a[i] << " ";
+		//cout << a[i] << " ";
 	}
-	cout << endl;
-	cout << "wynik r= " << r << endl;
+	//cout << endl;
+	//cout << "wynik r= " << r << endl;
 	return m;
 }
 
@@ -344,7 +344,7 @@ void City::TraverseTree(vector <vector <float>> matrix, vector <vector <int>> *p
 	{
 		if (p->size() == cityMatrix.size()-2)
 		{
-			cout << "jest: " << r << endl;
+			//cout << "jest: " << r << endl;
 			vector <int> h;
 			h.push_back(0);
 			h.push_back(1);
@@ -370,7 +370,11 @@ void City::TraverseTree(vector <vector <float>> matrix, vector <vector <int>> *p
 		}
 		p->pop_back();
 	}
-	cout << "mS: " << minSolution << endl;
+	//cout << "mS: " << minSolution << endl;
+}
+
+float City::getMinSol() {
+	return minSolution;
 }
 	
 

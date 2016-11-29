@@ -24,7 +24,7 @@ Generator::Generator(int cityAmount, int horizontalBorderDown, int horizontalBor
 		{
 			tab.push_back(rand() % (horizontalBorderUp - horizontalBorderDown) + horizontalBorderDown);
 			tab.push_back(rand() % (verticalBorderRight - verticalBorderLeft) + verticalBorderLeft);
-			plik << tab[0] << " " << tab[1] << "\n";
+			plik <<i <<" "<<tab[0] << " " << tab[1] << "\n";
 			tab.clear();
 		}
 	}
