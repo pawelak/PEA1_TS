@@ -23,6 +23,7 @@ City::City(string filename)			// czyta z pliku
 void City::verticlesTab(string filename)
 {
 	vector <int> tmp;
+	int useless;
 
 	tmp.clear();
 
@@ -36,12 +37,14 @@ void City::verticlesTab(string filename)
 
 		for (int i = 0; i < numberOfCities; i++)
 		{
-			for (int j = 0; j < 2; j++)
+			for (int j = 0; j < 3; j++)
 			{
-
-
-				file >> help;
-				tmp.push_back(help);
+				if (j==0)
+					file >> useless;
+				else {
+					file >> help;
+					tmp.push_back(help);
+				}
 			}
 			cityTab.push_back(tmp);
 			tmp.clear();

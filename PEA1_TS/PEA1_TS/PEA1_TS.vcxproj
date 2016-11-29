@@ -146,12 +146,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="City.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="PEA1_TS.cpp" />
     <ClCompile Include="stdafx.cpp">
