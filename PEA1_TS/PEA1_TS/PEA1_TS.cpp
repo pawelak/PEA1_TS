@@ -8,11 +8,11 @@
 
 int main()
 {
-	//Generator g(9, -10, 10, -10, 10);
+	Generator g(6, 0, 5, 0, 10);
 	City city("plik.txt");
 	//city.print();
-	//city.bruteForce();
-	//city.printBestPermutation();
+	city.bruteForce();
+	city.printBestPermutation();
 	city.duplicate();
 
 	city.printMatrix();
@@ -20,9 +20,6 @@ int main()
 	float r=0;
 
 	
-	
-	cout << endl << r << endl;
-
 	city.TraverseTree(city.cityMatrix, &city.path, r);
 
 	//city.deleteRowAndColumn(1, 1, city.cityMatrix);

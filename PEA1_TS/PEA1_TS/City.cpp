@@ -176,18 +176,27 @@ void City::duplicate()
 
 vector <vector <float>> City::Reduce(vector <vector <float>> m, float &r)		//moja wersja reduce ¿eby nie trzeba by³o odtwarzaæ nic!
 {										//sprawdzi³em wypliuwa faktycznie tablicê z innymi wartoœciami (nie sprawdza³em poprawnoœci)
-	vector <vector <float>> result = m;
 	vector <float> a;
-	a = FindSmallestH(result);
-	SubtractH(a, result);
-	for (int i = 0; i < a.size(); i++)r += a[i];
+	a = FindSmallestH(m);
+	SubtractH(a, m);
+	for (int i = 0; i < a.size(); i++)
+	{
+		r += a[i];
+		//cout << a[i] << " ";
+	}
+	cout << endl;
 	a.clear();
 
-	a = FindSmallestV(result);
-	SubtractV(a, result);
-	for (int i = 0; i < a.size(); i++)r += a[i];
-
-	return result;
+	a = FindSmallestV(m);
+	SubtractV(a, m);
+	for (int i = 0; i < a.size(); i++)
+	{
+		r += a[i];
+		cout << a[i] << " ";
+	}
+	cout << endl;
+	cout << "wynik r= " << r << endl;
+	return m;
 }
 
 vector<float> City::FindSmallestH(vector <vector <float>> m)
@@ -234,8 +243,7 @@ void City::SubtractH(vector <float> a, vector <vector <float>> &m)
 	{
 		for (int j = 0; j < m.size(); j++)
 		{
-			if (i == j)continue;
-			m[i][j] -= a[i];
+			if (i != j)m[i][j] -= a[i];
 		}
 	}
 }
@@ -246,8 +254,8 @@ void City::SubtractV(vector <float> a, vector <vector <float>> &m)
 	{
 		for (int j = 0; j < m.size(); j++)
 		{
-			if (i == j)continue;
-			m[j][i] -= a[i];
+			if (i != j)m[j][i] -= a[i];
+			
 		}
 	}
 }
@@ -333,7 +341,7 @@ void City::TraverseTree(vector <vector <float>> matrix, vector <vector <int>> *p
 	{
 		if (p->size() == cityMatrix.size()-2)
 		{
-			
+			cout << "jest: " << r << endl;
 			vector <int> h;
 			h.push_back(0);
 			h.push_back(1);
@@ -359,7 +367,7 @@ void City::TraverseTree(vector <vector <float>> matrix, vector <vector <int>> *p
 		}
 		p->pop_back();
 	}
-	cout << "minSolution: " <<  minSolution << endl;
+	cout << "mS: " << minSolution << endl;
 }
 	
 
