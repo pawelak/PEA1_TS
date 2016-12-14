@@ -17,7 +17,11 @@ private:
 	vector <int> xy;
 
 	
+	vector <vector<float>> shortestPath;
+	vector <vector<int>> streamManager;
 
+	vector <vector<float>> g;
+	vector <vector<float>> p;
 	
 public:
 	vector <vector <int>> path;
@@ -32,6 +36,13 @@ public:
 
 	void printMatrix();
 	void printMatrix2();
+	void dynamic();
+	void dynamic(vector<vector<float>> cityMatrix);
+	int tsp(int start, int set);
+	int tsphelper();
+	void FloydWarshallAlgorithms();
+	void FloydWarshallAlgorithms(vector<float> cityMatrix);
+	void droga(int u, int v);
 	//void printSomeMatrix(vector<vector<float>> m);
 	void bruteForce();
 	unsigned long factorial(unsigned long f);

@@ -58,7 +58,7 @@ void City::verticlesTab(string filename)
 void City::generateMatrix()
 {
 	vector <float> tmp;
-	for (int j = 0; j < numberOfCities; j++)			//paskudne sprawdziæ!!!
+	for (int j = 0; j < numberOfCities; j++)			
 	{
 		tmp.push_back(0);
 	}
@@ -118,6 +118,125 @@ void City::printMatrix2()
 }
 
 
+//---------------------------------- dynamic -----------------------------------------
+void City::dynamic() {
+
+	for (int i = 0; i < cityMatrix.size(); i++) {
+		for (int j = 0; j < cityMatrix.size(); j++) {
+			if (i == j)
+				cityMatrix[i][j] = 0;
+		}
+	}
+
+
+	printMatrix();
+	cout << endl;
+
+
+	vector <float> help;
+	for (int i = 0; i < numberOfCities; i++) {
+		for (int j = 0; j < pow(2,numberOfCities); j++) {
+			help.push_back(0);
+		}
+		g.push_back(help);
+		p.push_back(help);
+		help.clear();
+	}
+
+	cout << tsphelper() << endl;
+}
+
+int City::tsp(int start, int set) {
+	int masked, mask, result = -1, temp;
+	if (g[start][set] != -1) {
+		return g[start][set];
+	}
+	else {
+		for (int x = 0; x < numberOfCities; x++) {
+			mask = pow(2, numberOfCities) - 1 - (int)pow(2, x);
+			masked = set & mask;
+			if (masked != set) {
+				temp = cityMatrix[start][x] + tsp(x, masked);
+				if (result == -1 || result > temp)
+					result = temp;
+				p[start][set] = x;
+			}
+		}
+	}
+	g[start][set] = result;
+	return result;
+}
+int City::tsphelper() {
+	for (int i = 0; i < numberOfCities; i++) {
+		for (int j = 0; j < pow(2, numberOfCities); j++) {
+			g[i][j] = -1;
+			p[i][j] = -1;
+		}
+	}
+
+	// init matrix g ,from distance matrix graph
+	for (int i = 0; i < numberOfCities; i++) {
+		g[i][0] = cityMatrix[i][0];
+	}
+
+	return tsp(0, pow(2, numberOfCities) - 2);
+}
+
+void City::FloydWarshallAlgorithms() {
+
+
+	vector <float> help;
+	vector <int> help2;
+	for (int i = 0; i < numberOfCities; i++) {
+		for (int j = 0; j < numberOfCities; j++) {
+			if (i == j) 
+				help.push_back(0);
+			else
+				help.push_back(666);
+
+			help2.push_back(-1);
+			help2.push_back(-1);
+
+		}
+		shortestPath.push_back(help);
+		streamManager.push_back(help2);
+		help.clear();
+		help2.clear();
+	}
+
+	
+		for (int k = 0; k<numberOfCities; k++) {
+			for (int i = 0; i<numberOfCities; i++) {
+				for (int j = 0; j<numberOfCities; j++) {
+					if (shortestPath[i][j]>shortestPath[i][k] + shortestPath[k][j]) { //jezeli droga z i do j, poprzez wierzcholek posredni k jest krotsza niz aktualnie najkrotsza znana trasa i->j to zaktualizuj
+						shortestPath[i][j] = shortestPath[i][k] + shortestPath[k][j];
+						streamManager[i][j] = k; //oznacza to ze idac po sciezce i~>j trzeba przejsc przez k
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < numberOfCities; i++) {
+			for (int j = 0; j < numberOfCities; j++) {
+				cout << i + 1 << "->" << j + 1 << " dl. " << shortestPath[i][j] << ", przebieg: " << i + 1 << " ";
+				droga(i, j);
+				cout << j + 1 << endl;
+			}
+		}
+}
+
+void City::droga(int u, int v) { //odtwarza najkrotsza sciezke miedzy danymi wierzcholkami wykorzystujac macierz kierowania ruchem
+	if (streamManager[u][v] != -1) { //dopoki nie dojdziemy do zwyklej krawedzi po ktorej trzeba wejsc to zchodz rekurencyjnie i wypisuj wierzcholek posredni k
+		droga(u, streamManager[u][v]);
+		cout << streamManager[u][v] + 1 << " ";
+		droga(streamManager[u][v], v);
+	}
+}
+
+
+
+
+//--------------------   bruteforce ---------------------------------------------------
 void City::bruteForce()
 {
 	vector <int> forPermutation;
@@ -169,6 +288,7 @@ void City::printBestPermutation()
 }
 
 
+//----------------------------- to wszystko jest do B&B---------------------------------
 void City::duplicate()
 {
 	for (int i = 0; i < numberOfCities; i++)
@@ -177,8 +297,8 @@ void City::duplicate()
 	}
 }
 
-vector <vector <float>> City::Reduce(vector <vector <float>> m, float &r)		//moja wersja reduce ¿eby nie trzeba by³o odtwarzaæ nic!
-{										//sprawdzi³em wypliuwa faktycznie tablicê z innymi wartoœciami (nie sprawdza³em poprawnoœci)
+vector <vector <float>> City::Reduce(vector <vector <float>> m, float &r)		
+{										
 	vector <float> a;
 	a = FindSmallestH(m);
 	SubtractH(a, m);
@@ -263,7 +383,6 @@ void City::SubtractV(vector <float> a, vector <vector <float>> &m)
 	}
 }
 
-
 float City::findEdge(vector <vector <float>> m, int &row, int &column)
 {
 	vector <float> bestH;
@@ -331,9 +450,6 @@ vector<float> City::FindSmallestWithoutZeroV(vector <vector <float>> m)
 	return smallest;
 }
 
-
-
-
 void City::TraverseTree(vector <vector <float>> matrix, vector <vector <int>> *p, float LB)
 {
 	//cout << p->size() << endl;
@@ -377,9 +493,8 @@ float City::getMinSol() {
 	return minSolution;
 }
 	
-
 vector <vector <float>>  City::deleteRowAndColumn(int x, int y, vector <vector <float>> m)
-{								//mo¿e by zapamiêtywac te usuwane?
+{								
 	vector <vector <float>> mNew;
 	
 	for (int i = 0; i < m.size(); i++)
@@ -399,8 +514,8 @@ vector <vector <float>>  City::deleteRowAndColumn(int x, int y, vector <vector <
 	}
 	
 
-	for (int i = 0; i < mNew.size(); i++)		//beznadziejne mo¿na by to zwa¿eæ w tym powyzej 
-	{													// do dorobienia jak to poleci
+	for (int i = 0; i < mNew.size(); i++)		
+	{													
 		for (int j = 0; j < mNew.size(); j++)
 		{
 			if (i == j && mNew[i][j] != inv)mNew[i][j] = inv;

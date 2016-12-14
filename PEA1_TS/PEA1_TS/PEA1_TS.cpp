@@ -11,36 +11,37 @@ int main()
 {
 	Clock timer;
 
-	Generator g(6, 0, 100, 0, 100);
+	Generator g(7, 0, 100, 0, 100);
 	City city("plik.txt");
 
-	timer.startTimer();
+
 
 	//city.print();
 	city.bruteForce();
 
-	timer.endTimer();
-	cout << "TIME:   " << timer.ReturnTime() << endl;
 
 
-	//city.printBestPermutation();
+
+	city.printBestPermutation();
 	city.duplicate();
 
-	//city.printMatrix();
+	city.printMatrix();
+	//cout << "tutaj druga" << endl;
 	//city.printMatrix2();
-	float r=0;
+	//float r=0;
 	
 	
 	
-	timer.startTimer();
-	city.TraverseTree(city.cityMatrix, &city.path, r);
-	timer.endTimer();
-	cout <<"TIME:   " <<  timer.ReturnTime() << endl;
+
+	//city.TraverseTree(city.cityMatrix, &city.path, r);
 
 	//city.deleteRowAndColumn(1, 1, city.cityMatrix);
-	cout << city.getMinSol() << endl;
+	//cout << city.getMinSol() << endl;
 
+	//city.printMatrix2();
 
+	//city.FloydWarshallAlgorithms();
+	city.dynamic();
 	return 0;
 }
 
